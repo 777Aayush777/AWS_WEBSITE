@@ -211,72 +211,50 @@ function HeadsCard() {
   };
 
   return (
-    <div className="min-h-[600px] py-16 flex flex-col items-center">
-    <div className="w-full px-4 md:px-0">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-7 text-white text-2xl md:text-4xl mb-8">
-        <p className="text-center md:text-left whitespace-nowrap">Know Your Domain</p>
-        <RiArrowRightSLine className="w-8 h-8 md:w-10 md:h-10" />
-        <p className="text-center break-words max-w-[250px] md:max-w-none">
-          {domains[currentIndex].text}
-        </p>
+<div className="min-h-[600px] py-8 sm:py-12 md:py-16 flex flex-col items-center">
+      <div className="w-full px-4 sm:px-6 md:px-0">
+        <div className="flex flex-col xl:flex-row items-center justify-center gap-3 sm:gap-5 md:gap-7 text-white text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8">
+          <p className="text-center xl:text-left whitespace-nowrap">Know Your Domain</p>
+          <RiArrowRightSLine className="hidden xl:block w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />
+          <RiArrowRightSLine className="xl:hidden w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rotate-90" />
+          <p className="text-center break-words max-w-[250px] sm:max-w-[300px] md:max-w-none">
+            {domains[currentIndex].text}
+          </p>
+        </div>
       </div>
-    </div>
-
-    <div className="w-full flex flex-col items-center">
-      <div className="relative w-full">
-        {/* Desktop navigation arrows */}
+      <div className="w-full flex flex-col items-center relative">
+        {/* Desktop and Tablet navigation arrows */}
         <button
           onClick={handleClick2}
-          className="hidden md:block absolute left-5 top-1/2 transform -translate-y-1/2 text-white hover:scale-110 transition-transform p-2"
+          className="hidden sm:block absolute left-2 sm:left-4 md:left-8 top-1/2 transform -translate-y-1/2 text-white hover:scale-110 transition-transform p-2 z-10"
         >
           <RiArrowRightSLine size={35} className="rotate-180" />
         </button>
         <button
           onClick={handleClick1}
-          className="hidden md:block absolute right-5 top-1/2 transform -translate-y-1/2 text-white hover:scale-110 transition-transform p-2"
+          className="hidden sm:block absolute right-2 sm:right-4 md:right-8 top-1/2 transform -translate-y-1/2 text-white hover:scale-110 transition-transform p-2 z-10"
         >
           <RiArrowRightSLine size={35} />
         </button>
-
         <div className={`transition-opacity duration-300 ${isDelayed ? 'opacity-0' : 'opacity-100'} w-full`}>
           <CardComponent cardsData={domains[currentIndex].cards} />
         </div>
+        {/* Mobile-only navigation arrows */}
+        <div className="flex sm:hidden justify-center items-center gap-8 mt-8">
+          <button
+            onClick={handleClick2}
+            className="text-white hover:scale-110 transition-transform p-2"
+          >
+            <RiArrowRightSLine size={35} className="rotate-180" />
+          </button>
+          <button
+            onClick={handleClick1}
+            className="text-white hover:scale-110 transition-transform p-2"
+          >
+            <RiArrowRightSLine size={35} />
+          </button>
+        </div>
       </div>
-
-      {/* Mobile navigation arrows */}
-      <div className="flex md:hidden justify-center items-center gap-8 mt-8">
-        <button
-          onClick={handleClick2}
-          className="text-white hover:scale-110 transition-transform p-2"
-        >
-          <RiArrowRightSLine size={35} className="rotate-180" />
-        </button>
-        <button
-          onClick={handleClick1}
-          className="text-white hover:scale-110 transition-transform p-2"
-        >
-          <RiArrowRightSLine size={35} />
-        </button>
-      </div>
-    </div>
-
-      <style>
-        {`
-        .fade-enter {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        .fade-enter-active {
-          opacity: 1;
-          transform: translateY(0);
-          transition: opacity 500ms, transform 500ms;
-        }
-        .fade-exit-active {
-          opacity: 0;
-          transition: opacity 300ms;
-        }
-        `}
-      </style>
     </div>
   );
 }

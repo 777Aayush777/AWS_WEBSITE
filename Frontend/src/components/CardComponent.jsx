@@ -50,52 +50,49 @@ const Card = ({ id, imgSrc, githubLink, emailLink, linkedinLink, onHover }) => (
 
 const CardComponent = ({ cardsData }) => {
   const [hoveredCard, setHoveredCard] = useState(null);
-
   const handleHover = (id) => setHoveredCard(id);
-
+  
   const currentCardText = hoveredCard 
     ? cardsData.find(card => card.id === hoveredCard)?.text 
     : cardsData[0]?.text || "No cards available";
 
   return (
-    <div className="flex flex-wrap justify-between sm:justify-center items-start gap-[500px] mt-16">
-      <div className="relative flex gap-6 justify-center items-center">
-        {cardsData.length > 0 ? (
-          cardsData.map((card) => (
-            <Card
-              key={card.id}
-              {...card}
-              onHover={handleHover}
-            />
-          ))
-        ) : (
-          <p className="text-white font-semibold text-xl">No cards to display</p>
-        )}
+    <div className="container mx-auto px-4">
+      <div className="w-full flex flex-col xl:flex-row xl:justify-center items-center gap-12 xl:gap-4">
+        <div className="relative w-full max-w-[600px] md:max-w-[700px] h-[400px] flex justify-center items-center">
+          {cardsData.length > 0 ? (
+            cardsData.map((card) => (
+              <Card
+                key={card.id}
+                {...card}
+                onHover={handleHover}
+              />
+            ))
+          ) : (
+            <p className="text-white font-semibold text-xl">No cards to display</p>
+          )}
+        </div>
+        <div className="w-full max-w-[600px] md:max-w-[700px] xl:max-w-[650px] h-[380px] xl:h-[450px] p-8 border-2 border-blue-400 rounded-2xl 
+           text-white text-xl font-medium 
+          flex items-center justify-center shadow-lg transform transition-all duration-500
+          hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]">
+          {currentCardText}
+        </div>
       </div>
-      <div className="w-[600px] h-[380px] p-8 border-2 border-blue-400 rounded-2xl 
-         text-white text-xl font-medium 
-        flex items-center justify-center shadow-lg transform transition-all duration-500
-        hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] xs:w-[450px] xs:h-[285px]">
-        {currentCardText}
-      </div>
-
       <style>
         {`
           #card1 {
-            top: 0;
-            left: 85px;
+            transform: translateX(0);
             z-index: 2;
           }
           
           #card2 {
-            top: 15px;
-            left: 35px;
+            transform: translateX(-50px) translateY(15px);
             z-index: 1;
           }
           
           #card3 {
-            top: 15px;
-            left: 135px;
+            transform: translateX(50px) translateY(15px);
             z-index: 1;
           }
           
@@ -112,6 +109,20 @@ const CardComponent = ({ cardsData }) => {
           .card {
             pointer-events: auto;
             backface-visibility: hidden;
+          }
+
+          @media (min-width: 768px) and (max-width: 1279px) {
+            #card1 {
+              transform: translateX(0);
+            }
+            
+            #card2 {
+              transform: translateX(-60px) translateY(15px);
+            }
+            
+            #card3 {
+              transform: translateX(60px) translateY(15px);
+            }
           }
         `}
       </style>
